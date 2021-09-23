@@ -1,2 +1,0 @@
-# kodryan.github.io
- 
