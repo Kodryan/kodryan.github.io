@@ -1,11 +1,11 @@
 {
-    "name": "github_pages",
-    "short_name": "github_pages",
+    "name": "kodryan.github.io",
+    "short_name": "kodryan.github.io",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
     "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "description": "Dimitry Kodryan",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [
