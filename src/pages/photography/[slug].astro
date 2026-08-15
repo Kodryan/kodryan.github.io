@@ -1,0 +1,102 @@
+---
+import { Image } from 'astro:assets';
+import { content } from '../../data/content';
+import { galleries, type Gallery } from '../../data/galleries';
+import { withBase } from '../../data/site';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+export function getStaticPaths() {
+  return galleries.map((gallery) => ({
+    params: { slug: gallery.slug },
+    props: { gallery },
+  }));
+}
+
+interface Props {
+  gallery: Gallery;
+}
+
+const { gallery } = Astro.props;
+---
+
+<BaseLayout
+  title={`${gallery.title} — Photography by Dimitrii Codrean`}
+  description={gallery.description}
+  dark
+>
+  <header class="gallery-page-header">
+    <a class="back-link" href={withBase('/photography/')}>{content.photography.backLink}</a>
+    <div class="gallery-page-title">
+      <h1>{gallery.title}</h1>
+      <p>{gallery.description} {gallery.images.length} {content.gallery.photographs}.</p>
+    </div>
+  </header>
+
+  <div class="photo-grid" data-gallery>
+    {gallery.images.map((image, index) => (
+      <button
+        class="photo-button"
+        type="button"
+        data-index={index}
+        data-src={image.src}
+        aria-label={`Open photograph ${index + 1} of ${gallery.images.length}`}
+      >
+        <Image
+          src={image}
+          alt={`Photograph ${index + 1} from the ${gallery.title} series`}
+          widths={[640, 960, 1440]}
+          sizes="(max-width: 760px) 100vw, 72vw"
+          quality={86}
+        />
+      </button>
+    ))}
+  </div>
+
+  <dialog class="lightbox" aria-label={`${gallery.title} ${content.photography.imageViewer}`}>
+    <img alt="" />
+    <button class="close" type="button" aria-label="Close image viewer">×</button>
+    <button class="previous" type="button" aria-label="Previous photograph">←</button>
+    <button class="next" type="button" aria-label="Next photograph">→</button>
+    <p class="counter" aria-live="polite"></p>
+  </dialog>
+
+  <script>
+    const gallery = document.querySelector<HTMLElement>('[data-gallery]');
+    const dialog = document.querySelector<HTMLDialogElement>('.lightbox');
+
+    if (gallery && dialog) {
+      const triggers = [...gallery.querySelectorAll<HTMLButtonElement>('[data-index]')];
+      const image = dialog.querySelector<HTMLImageElement>('img');
+      const counter = dialog.querySelector<HTMLElement>('.counter');
+      let current = 0;
+
+      const show = (index: number) => {
+        current = (index + triggers.length) % triggers.length;
+        const trigger = triggers[current];
+        if (image) {
+          image.src = trigger.dataset.src ?? '';
+          image.alt = trigger.querySelector('img')?.alt ?? '';
+        }
+        if (counter) counter.textContent = `${String(current + 1).padStart(2, '0')} / ${String(triggers.length).padStart(2, '0')}`;
+      };
+
+      triggers.forEach((trigger, index) => {
+        trigger.addEventListener('click', () => {
+          show(index);
+          dialog.showModal();
+        });
+      });
+
+      dialog.querySelector('.close')?.addEventListener('click', () => dialog.close());
+      dialog.querySelector('.previous')?.addEventListener('click', () => show(current - 1));
+      dialog.querySelector('.next')?.addEventListener('click', () => show(current + 1));
+      dialog.addEventListener('click', (event) => {
+        if (event.target === dialog) dialog.close();
+      });
+      dialog.addEventListener('keydown', (event) => {
+        if (event.key === 'ArrowLeft') show(current - 1);
+        if (event.key === 'ArrowRight') show(current + 1);
+      });
+    }
+  </script>
+</BaseLayout>

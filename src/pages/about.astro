@@ -1,0 +1,23 @@
+---
+import { site } from '../data/site';
+import { content } from '../data/content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title={content.about.pageTitle}
+  description={content.about.pageDescription}
+>
+  <section class="about-grid">
+    <p class="eyebrow">{content.about.introductionLabel}</p>
+    <div class="about-copy">
+      <p>{content.about.introduction}</p>
+      <p class="small">
+        {content.about.body}
+      </p>
+      <p class="small">
+        {content.about.githubPrefix} <a href={site.github} rel="me"><u>{content.footer.githubLabel}</u></a>.
+      </p>
+    </div>
+  </section>
+</BaseLayout>

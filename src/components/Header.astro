@@ -1,0 +1,80 @@
+---
+import { site, withBase } from '../data/site';
+import { content } from '../data/content';
+
+const pathname = Astro.url.pathname;
+const nav = content.navigation;
+---
+
+<header class="site-header">
+  <a class="wordmark" href={withBase('/')} aria-label={`${site.name}, ${content.accessibility.homeLink}`}>
+    <strong>{site.name}</strong>
+  </a>
+
+  <div class="header-controls">
+    <nav aria-label={content.accessibility.primaryNavigation}>
+      {nav.map((item) => (
+        <a
+          href={withBase(item.href)}
+          aria-current={pathname.includes(item.href) ? 'page' : undefined}
+        >
+          {item.label}
+        </a>
+      ))}
+    </nav>
+
+    <button
+      class="theme-toggle"
+      type="button"
+      data-theme-toggle
+      data-dark-label={content.accessibility.switchToDarkTheme}
+      data-light-label={content.accessibility.switchToLightTheme}
+      aria-label={content.accessibility.switchToDarkTheme}
+      aria-pressed="false"
+    >
+      <svg class="theme-icon theme-icon-sun" viewBox="0 0 24 24" aria-hidden="true">
+        <circle cx="12" cy="12" r="3.5" />
+        <path d="M12 2v2.5M12 19.5V22M4.93 4.93l1.77 1.77M17.3 17.3l1.77 1.77M2 12h2.5M19.5 12H22M4.93 19.07l1.77-1.77M17.3 6.7l1.77-1.77" />
+      </svg>
+      <svg class="theme-icon theme-icon-moon" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M20.4 15.1A8.5 8.5 0 0 1 8.9 3.6 8.5 8.5 0 1 0 20.4 15.1Z" />
+      </svg>
+    </button>
+  </div>
+</header>
+
+<script>
+  const themeToggle = document.querySelector<HTMLButtonElement>('[data-theme-toggle]');
+  const systemTheme = window.matchMedia('(prefers-color-scheme: dark)');
+
+  const applyTheme = (isDark: boolean) => {
+    document.documentElement.classList.toggle('dark', isDark);
+    document
+      .querySelector<HTMLMetaElement>('meta[name="theme-color"]')
+      ?.setAttribute('content', isDark ? '#11110f' : '#efede7');
+  };
+
+  const updateThemeToggle = () => {
+    if (!themeToggle) return;
+
+    const isDark = document.documentElement.classList.contains('dark');
+    themeToggle.setAttribute('aria-pressed', String(isDark));
+    themeToggle.setAttribute(
+      'aria-label',
+      isDark ? themeToggle.dataset.lightLabel ?? '' : themeToggle.dataset.darkLabel ?? '',
+    );
+  };
+
+  updateThemeToggle();
+
+  themeToggle?.addEventListener('click', () => {
+    const isDark = !document.documentElement.classList.contains('dark');
+    applyTheme(isDark);
+    updateThemeToggle();
+  });
+
+  systemTheme.addEventListener('change', (event) => {
+    applyTheme(event.matches);
+    updateThemeToggle();
+  });
+</script>

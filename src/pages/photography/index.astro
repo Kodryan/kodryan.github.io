@@ -1,0 +1,19 @@
+---
+import GalleryCard from '../../components/GalleryCard.astro';
+import { content } from '../../data/content';
+import { galleries } from '../../data/galleries';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title={content.photography.pageTitle}
+  description={content.photography.pageDescription}
+>
+  <div class="section-heading page-section-heading">
+    <h2>{content.photography.collectionsHeading}</h2>
+    <p>{galleries.reduce((total, gallery) => total + gallery.images.length, 0)} {content.gallery.photographs}</p>
+  </div>
+  <div class="gallery-grid">
+    {galleries.map((gallery, index) => <GalleryCard {gallery} {index} />)}
+  </div>
+</BaseLayout>

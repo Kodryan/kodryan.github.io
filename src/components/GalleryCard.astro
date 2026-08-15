@@ -1,0 +1,37 @@
+---
+import { Image } from 'astro:assets';
+import type { Gallery } from '../data/galleries';
+import { content } from '../data/content';
+import { withBase } from '../data/site';
+
+interface Props {
+  gallery: Gallery;
+  index: number;
+}
+
+const { gallery, index } = Astro.props;
+const frameLabel = gallery.images.length === 1
+  ? content.gallery.singularFrame
+  : content.gallery.pluralFrames;
+---
+
+<article class="gallery-card">
+  <a class="gallery-image" href={withBase(`/photography/${gallery.slug}/`)}>
+    <Image
+      src={gallery.cover}
+      alt={`Open the ${gallery.title} photo series`}
+      widths={[640, 960, 1440]}
+      sizes="(max-width: 760px) 92vw, 46vw"
+      loading={index === 0 ? 'eager' : 'lazy'}
+      quality={84}
+    />
+  </a>
+  <div class="gallery-meta">
+    <span class="index">0{index + 1}</span>
+    <div>
+      <p>{gallery.eyebrow} · {gallery.images.length} {frameLabel}</p>
+      <h2><a href={withBase(`/photography/${gallery.slug}/`)}>{gallery.title}</a></h2>
+    </div>
+    <span class="arrow" aria-hidden="true">↗</span>
+  </div>
+</article>
