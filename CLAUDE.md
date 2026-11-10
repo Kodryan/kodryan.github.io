@@ -1,6 +1,6 @@
 # Repository guidance
 
-This is Dimitrii Codrean's static photography and writing site. It uses Astro 7,
+This is Dimitrii Codrean's static photography gallery site. It uses Astro 7,
 TypeScript in strict mode, and npm. GitHub Pages serves the generated site at
 `https://kodryan.github.io/`.
 
@@ -17,15 +17,14 @@ no separate test or lint script.
 
 ## Project map
 
-- `src/pages/`: file-based routes; dynamic article and gallery pages are
-  statically generated with `getStaticPaths`.
+- `src/pages/`: file-based routes; the home page lists galleries and
+  `photography/[slug].astro` statically generates each gallery with
+  `getStaticPaths`.
 - `src/layouts/` and `src/components/`: shared Astro UI.
 - `src/styles/global.css`: site-wide design tokens and styles.
-- `src/data/site.ts`: site metadata, date formatting, and the `withBase` URL
-  helper.
+- `src/data/site.ts`: site metadata and the `withBase` URL helper.
+- `src/data/content.ts`: remaining UI labels (accessibility, back link, 404).
 - `src/data/galleries.ts`: gallery metadata and automatic photo discovery.
-- `src/content/articles/`: Markdown/MDX articles validated by
-  `src/content.config.ts`.
 - `src/assets/images/`: source photographs processed by `astro:assets`.
 - `public/`: files copied without processing, currently favicon and social
   preview image.
@@ -47,9 +46,8 @@ no separate test or lint script.
   `src/assets/images/<slug>/`, adding its cover image, extending the glob in
   `src/data/galleries.ts`, and adding its metadata there. The current sorter
   expects numeric filenames such as `1.jpg`.
-- Add an article by copying `src/content/articles/_example.md`. Required front
-  matter is `title`, `description`, and `publishedAt`; `updatedAt` is optional,
-  and `draft: true` excludes it from generated pages.
+- The site is photo-only: no articles, about page, or descriptive copy on
+  pages. Gallery descriptions are used only for meta tags.
 - Keep shared visual changes in `src/styles/global.css` and reuse its existing
   CSS variables, responsive layout patterns, dark gallery theme, focus states,
   and reduced-motion/accessibility behavior.

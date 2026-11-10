@@ -1,9 +1,6 @@
 ---
 import { site, withBase } from '../data/site';
 import { content } from '../data/content';
-
-const pathname = Astro.url.pathname;
-const nav = content.navigation;
 ---
 
 <header class="site-header">
@@ -12,17 +9,6 @@ const nav = content.navigation;
   </a>
 
   <div class="header-controls">
-    <nav aria-label={content.accessibility.primaryNavigation}>
-      {nav.map((item) => (
-        <a
-          href={withBase(item.href)}
-          aria-current={pathname.includes(item.href) ? 'page' : undefined}
-        >
-          {item.label}
-        </a>
-      ))}
-    </nav>
-
     <button
       class="theme-toggle"
       type="button"

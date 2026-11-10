@@ -7,7 +7,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 <BaseLayout title={content.notFound.pageTitle}>
   <section class="not-found">
     <h1>404</h1>
-    <p>{content.notFound.message}</p>
     <a href={withBase('/')}>{content.notFound.returnHome}</a>
   </section>
 </BaseLayout>

@@ -25,10 +25,9 @@ const { gallery } = Astro.props;
   dark
 >
   <header class="gallery-page-header">
-    <a class="back-link" href={withBase('/photography/')}>{content.photography.backLink}</a>
+    <a class="back-link" href={withBase('/')}>{content.photography.backLink}</a>
     <div class="gallery-page-title">
       <h1>{gallery.title}</h1>
-      <p>{gallery.description} {gallery.images.length} {content.gallery.photographs}.</p>
     </div>
   </header>
 

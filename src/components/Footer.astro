@@ -1,19 +1,9 @@
 ---
-import { site, withBase } from '../data/site';
+import { site } from '../data/site';
 import { content } from '../data/content';
 ---
 
 <footer class="site-footer">
-  <p class="footer-statement">
-    {content.footer.statementFirstLine}<br />{content.footer.statementSecondLine}
-  </p>
-  <div class="footer-links">
-    <a href={withBase(content.navigation[0].href)}>{content.navigation[0].label}</a>
-    <a href={withBase(content.navigation[1].href)}>{content.navigation[1].label}</a>
-    <a href={site.github} rel="me">{content.footer.githubLabel}</a>
-  </div>
-  <p class="copyright">
-    © {new Date().getFullYear()} {site.name} · {content.footer.builtWith}
-    {' '}<a href="https://github.com/withastro/astro">{content.footer.astroLabel}</a>
-  </p>
+  <p class="copyright">© {new Date().getFullYear()} {site.name}</p>
+  <a href={site.github} rel="me">{content.footer.githubLabel}</a>
 </footer>
