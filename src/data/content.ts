@@ -4,14 +4,11 @@ export const content = {
     skipToContent: 'Skip to content',
     switchToDarkTheme: 'Switch to dark theme',
     switchToLightTheme: 'Switch to light theme',
+    instagram: 'Instagram',
   },
   photography: {
     backLink: '← All photography',
     imageViewer: 'image viewer',
-  },
-  gallery: {
-    singularFrame: 'frame',
-    pluralFrames: 'frames',
   },
   footer: {
     githubLabel: 'GitHub',

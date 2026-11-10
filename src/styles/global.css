@@ -5,7 +5,6 @@
   --muted: #68675f;
   --line: color-mix(in srgb, var(--ink) 18%, transparent);
   --signal: #e45d34;
-  --serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
   --sans: Inter, "Helvetica Neue", Helvetica, Arial, sans-serif;
   --page: min(1520px, calc(100vw - 56px));
   --heading-size: clamp(36px, 4.2vw, 64px);
@@ -107,7 +106,7 @@ a {
 .header-controls {
   display: flex;
   align-items: center;
-  gap: clamp(16px, 2.2vw, 32px);
+  gap: 10px;
 }
 
 .site-footer a,
@@ -119,7 +118,7 @@ a {
   text-transform: uppercase;
 }
 
-.theme-toggle {
+.icon-button {
   display: grid;
   width: 32px;
   height: 32px;
@@ -133,18 +132,18 @@ a {
   transition: background-color 180ms ease, border-color 180ms ease, color 180ms ease;
 }
 
-.theme-toggle:hover {
+.icon-button:hover {
   border-color: var(--ink);
   background: var(--ink);
   color: var(--paper);
 }
 
-.theme-toggle:focus-visible {
+.icon-button:focus-visible {
   outline: 2px solid var(--signal);
   outline-offset: 3px;
 }
 
-.theme-icon {
+.icon {
   width: 15px;
   height: 15px;
   fill: none;
@@ -202,14 +201,12 @@ html.dark .theme-icon-moon {
   display: grid;
   grid-template-columns: 42px 1fr auto;
   gap: 14px;
-  align-items: start;
+  align-items: baseline;
   padding-top: 16px;
 }
 
 .gallery-meta .index,
-.gallery-meta p,
 .gallery-meta .arrow {
-  margin: 4px 0 0;
   color: var(--muted);
   font-size: 10px;
   font-weight: 650;
@@ -218,10 +215,9 @@ html.dark .theme-icon-moon {
 }
 
 .gallery-meta h2 {
-  margin: 3px 0 0;
-  font-family: var(--serif);
+  margin: 0;
   font-size: clamp(28px, 3vw, 48px);
-  font-weight: 400;
+  font-weight: 500;
   letter-spacing: -.02em;
 }
 
@@ -265,11 +261,10 @@ html.dark .theme-icon-moon {
 .gallery-page-title h1 {
   grid-column: 2;
   margin: 0;
-  font-family: var(--serif);
   font-size: var(--heading-size);
-  font-weight: 400;
+  font-weight: 500;
   letter-spacing: -.02em;
-  line-height: .8;
+  line-height: .9;
 }
 
 .photo-grid {
@@ -394,11 +389,10 @@ html.dark .theme-icon-moon {
 
 .not-found h1 {
   margin: 0;
-  font-family: var(--serif);
   font-size: clamp(100px, 24vw, 360px);
-  font-weight: 400;
-  letter-spacing: -.02em;
-  line-height: .7;
+  font-weight: 500;
+  letter-spacing: -.04em;
+  line-height: .8;
 }
 
 .not-found a {

@@ -1,7 +1,6 @@
 ---
 import { Image } from 'astro:assets';
 import type { Gallery } from '../data/galleries';
-import { content } from '../data/content';
 import { withBase } from '../data/site';
 
 interface Props {
@@ -10,9 +9,6 @@ interface Props {
 }
 
 const { gallery, index } = Astro.props;
-const frameLabel = gallery.images.length === 1
-  ? content.gallery.singularFrame
-  : content.gallery.pluralFrames;
 ---
 
 <article class="gallery-card">
@@ -28,10 +24,7 @@ const frameLabel = gallery.images.length === 1
   </a>
   <div class="gallery-meta">
     <span class="index">0{index + 1}</span>
-    <div>
-      <p>{gallery.eyebrow} · {gallery.images.length} {frameLabel}</p>
-      <h2><a href={withBase(`/photography/${gallery.slug}/`)}>{gallery.title}</a></h2>
-    </div>
+    <h2><a href={withBase(`/photography/${gallery.slug}/`)}>{gallery.title}</a></h2>
     <span class="arrow" aria-hidden="true">↗</span>
   </div>
 </article>

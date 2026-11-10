@@ -8,7 +8,6 @@ type ImageModule = { default: ImageMetadata };
 export type Gallery = {
   slug: string;
   title: string;
-  eyebrow: string;
   description: string;
   cover: ImageMetadata;
   images: ImageMetadata[];
@@ -33,7 +32,6 @@ export const galleries: Gallery[] = [
   {
     slug: 'photos',
     title: 'Photographs',
-    eyebrow: 'Personal work',
     description: 'City light, passing figures, and moments found between destinations.',
     cover: photosCover,
     images: imagesFor('photos'),
@@ -41,7 +39,6 @@ export const galleries: Gallery[] = [
   {
     slug: 'palermo',
     title: 'Palermo',
-    eyebrow: 'Street study',
     description: 'A close look at the gestures, faces, and restless energy of Palermo.',
     cover: palermoCover,
     images: imagesFor('palermo'),
@@ -49,7 +46,6 @@ export const galleries: Gallery[] = [
   {
     slug: 'commissioned',
     title: 'Commissioned',
-    eyebrow: 'Selected work',
     description: 'Documentary images made with people at work, where precision meets trust.',
     cover: commissionedCover,
     images: imagesFor('commissioned'),

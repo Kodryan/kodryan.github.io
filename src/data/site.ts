@@ -3,6 +3,7 @@ export const site = {
   title: 'Dimitrii Codrean — Photography',
   description: 'Photography by Dimitrii Codrean.',
   github: 'https://github.com/Kodryan',
+  instagram: 'https://www.instagram.com/coderyan',
 };
 
 export const withBase = (path = '/') => {
