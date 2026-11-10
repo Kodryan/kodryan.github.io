@@ -1,0 +1,8 @@
+#!/bin/sh
+set -e
+
+staged=$(git diff --cached --name-only --diff-filter=ACMR -- 'src/assets/images/*.jpg' 'src/assets/images/*.jpeg' 'src/assets/images/*.JPG' 'src/assets/images/*.JPEG')
+[ -z "$staged" ] && exit 0
+
+node scripts/resize-photos.mjs $staged
+git add $staged

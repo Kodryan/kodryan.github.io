@@ -4,6 +4,9 @@
   "type": "module",
   "scripts": {
     "dev": "astro dev",
+    "prepare": "git config core.hooksPath .githooks || true",
+    "photos": "node scripts/resize-photos.mjs",
+    "prebuild": "node scripts/resize-photos.mjs --check",
     "build": "astro build",
     "preview": "astro preview",
     "check": "astro check"

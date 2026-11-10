@@ -9,7 +9,9 @@ TypeScript in strict mode, and npm. GitHub Pages serves the generated site at
 - Install exactly from the lockfile: `npm ci`
 - Start local development: `npm run dev`
 - Type/content validation: `npm run check`
-- Production build: `npm run build`
+- Production build: `npm run build` (its `prebuild` step fails on oversized
+  photos)
+- Downscale oversized photos in place: `npm run photos`
 - Preview the production build: `npm run preview`
 
 Run `npm run check` and `npm run build` after code or content changes. There is
@@ -46,6 +48,11 @@ no separate test or lint script.
   `src/assets/images/<slug>/`, adding its cover image, extending the glob in
   `src/data/galleries.ts`, and adding its metadata there. The current sorter
   expects numeric filenames such as `1.jpg`.
+- Photos are capped at 2048px on the long edge (`scripts/resize-photos.mjs`)
+  so full-resolution originals never reach the public repo or site. The
+  `.githooks/pre-commit` hook (enabled by `npm install` via `prepare`)
+  downscales staged JPGs automatically. Never commit with hooks bypassed or
+  raise the cap without the owner's approval; git history keeps every original.
 - The site is photo-only: no articles, about page, or descriptive copy on
   pages. Gallery descriptions are used only for meta tags.
 - Keep shared visual changes in `src/styles/global.css` and reuse its existing
